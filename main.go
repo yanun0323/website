@@ -28,8 +28,6 @@ func main() {
 		fmt.Println(err)
 	}
 	btn := make([]byte, 0, len(entries))
-	btn = append(btn, []byte(GetHomeButtonStr())...)
-	btn = append(btn, []byte(GetRootButtonStr())...)
 
 	for _, entry := range entries {
 		if entry.IsDir() || entry.Name()[0] == '.' {
@@ -127,18 +125,10 @@ func SetPage(e *echo.Echo, path, dir, filename, suffix, btn string) {
 	})
 }
 
-func GetRootButtonStr() string {
-	return `<a href="http://localhost:8080/"> <button class="sidebar-button"> Root </button> </a>`
-}
-
-func GetHomeButtonStr() string {
-	return `<a href="http://localhost:8080/home"> <button class="sidebar-button"> Home </button> </a>`
-}
-
 func GetButtonStr(filename string) string {
 	return `<a href="http://localhost:8080/` +
-		filename + `"> <button class="sidebar-button"> ` +
-		filename + ` </button> </a>`
+		filename + `"> <button class="sidebar-button sidebar-font-small"> ` +
+		"・" + filename + ` </button> </a>`
 }
 
 func NewMarkdownReader() goldmark.Markdown {
