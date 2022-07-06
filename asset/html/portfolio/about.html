@@ -1,0 +1,991 @@
+<html>
+
+<head>
+    <title> Yanun
+    </title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            $('body').css('display', 'none');
+            $('body').delay(300);
+            $('body').fadeIn(600); //一開始淡入
+            $('[id=0]').click(function (event) { //點選 class 為 link 的 a 元件時觸發
+                event.preventDefault(); //取消事件預設動作
+                newLocation = this.href;
+                $('body').fadeOut(300, newpage); //點選後淡出
+            });
+
+            function newpage() {
+                window.location = newLocation;
+            }
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113862860-1"></script>
+
+    <!-- 點擊切換顯示主選單 
+
+
+
+
+  function Trim(el){
+      (el.innerHTML.trim) ? el.innerHTML.trim() : el.innerHTML.replace(/^\s+/,'');
+  }-->
+    <script>
+
+        function SwitchOn() {
+            var v = document.getElementsByName("@");
+            var w = document.getElementsByClassName("MenuBranch");
+            var x = document.getElementsByName("#");
+            var y = document.getElementsByClassName("MenuIcon");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.visibility = "visible";
+                x[i].style.opacity = "0.8";
+                x[i].style.margin = "1em 0em";
+            }
+            for (i = 0; i < w.length; i++) {
+                w[i].name = "%"
+            }
+            v[0].style.opacity = "1";
+            y[0].style.opacity = "0";
+            y[0].style.transition = "0.2s";
+            end;
+        }
+
+        function IconSwitchOn() {
+            var y = document.getElementsByName("@2");
+            var x = document.getElementsByName("#2");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.visibility = "visible";
+                x[i].style.opacity = "1";
+                x[i].style.left = "-60";
+            }
+            y[0].style.opacity = "0";
+            y[0].style.transition = "0.2s";
+            y[0].style.transitionDelay = "0s";
+            y[0].style.pointerEvents = "none";
+            end;
+        }
+
+        function SwitchOff() {
+            var v = document.getElementsByName("@");
+            var w = document.getElementsByClassName("MenuBranch");
+            var x = document.getElementsByName("#");
+            var x2 = document.getElementsByName("#2");
+            var y = document.getElementsByClassName("MenuIcon");
+            var y2 = document.getElementsByName("@2");
+            var i;
+            var j;
+            for (i = 0; i < x.length; i++) {
+                x[i].style.visibility = "hidden";
+                x[i].style.opacity = "0";
+                x[i].style.margin = "0em 0em";
+            }
+            for (j = 0; j < x2.length; j++) {
+                x2[j].style.visibility = "hidden";
+                x2[j].style.opacity = "0";
+                x2[j].style.left = "-20px";
+            }
+
+            for (i = 0; i < w.length; i++) {
+                w[i].style.height = "0";
+                w[i].style.margin = "-4.5px 0";        //調整動畫旁枝收合間距
+                w[i].style.padding = "0 0 0 0";
+                w[i].style.visibility = "hidden";
+                w[i].style.opacity = "0";
+                w[i].style.transition = ".3s";
+                w[i].name = "$"
+            }
+            v[0].style.opacity = "0";
+            y[0].style.opacity = "0.6";
+            y[0].style.transition = "1s";
+            y2[0].style.opacity = "0.3";
+            y2[0].style.transition = "1s";
+            y2[0].style.transitionDelay = ".6s";
+            y2[0].style.pointerEvents = "visible";
+            w[0].id = "0";
+            end;
+        }
+
+
+
+        function BranchOn() {
+            var w = document.getElementsByName("%");
+            var i;
+            for (i = 0; i < w.length; i++) {
+                w[i].style.height = "1.5em";
+                w[i].style.margin = "15px 0";
+                w[i].style.padding = "5px 0 0 0";    //調整動畫旁枝展開間距
+                w[i].style.visibility = "visible";
+                w[i].style.opacity = "0.8";
+                w[i].style.transition = ".5s";
+                w[i].style.transitionDelay = "0s";
+            }
+            end;
+        }
+
+
+
+        function BranchSwitch() {
+            var w = document.getElementsByName("%");
+            var x = document.getElementsByName("#");
+            var z = w[0].id
+            var i;
+
+            if (z == 0) {
+                for (i = 0; i < w.length; i++) {
+                    w[i].style.height = "1.5em";
+                    w[i].style.margin = "15px 0";
+                    w[i].style.padding = "5px 0 0 0";    //調整動畫旁枝展開間距
+                    w[i].style.visibility = "visible";
+                    w[i].style.opacity = "0.8";
+                    w[i].style.transition = ".5s";
+                }
+                w[0].id = "1";
+            }
+
+
+            else {
+                for (i = 0; i < w.length; i++) {
+                    w[i].style.height = "0";
+                    w[i].style.margin = "-4.5px 0";        //調整動畫旁枝收合間距
+                    w[i].style.padding = "0 0 0 0";
+                    w[i].style.visibility = "hidden";
+                    w[i].style.opacity = "0";
+                    w[i].style.transition = ".3s";
+                }
+                w[0].id = "0";
+
+                for (i = 0; i < x.length; i++) {
+                    x[i].class = "MenuButton";
+                }
+                w[0].id = "0";
+            }
+            end;
+        }
+
+
+
+
+
+        function OverChage(i, str, t) {
+            var item = document.getElementById(i)
+            if (t) {
+                item.innerHTML = str;
+                item.style.fontWeight = "100";
+                item.style.color = "#aaa";
+                item.style.fontFamily = "Microsoft JhengHei";
+                item.style.letterSpacing = "4px";
+            } else {
+                item.innerHTML = str;
+                item.style.fontWeight = "";
+                item.style.color = "";
+                item.style.fontFamily = "";
+                item.style.letterSpacing = "";
+            }
+        }
+
+    </script>
+
+
+
+
+    <script>
+        //點一下複製Email
+
+
+        window.Clipboard = (function (window, document, navigator) {
+            var textArea,
+                copy;
+
+            function isOS() {
+                return navigator.userAgent.match(/ipad|iphone/i);
+            }
+
+            function createTextArea(text) {
+                textArea = document.createElement('textArea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+            }
+
+            function selectText() {
+                var range,
+                    selection
+
+                if (isOS()) {
+                    var oldContentEditable = document.contentEditable,
+                        oldReadOnly = document.readOnly;
+
+                    range = document.createRange();
+
+                    document.contentEditable = true;
+                    document.readOnly = false;
+
+                    range.selectNodeContents(textArea);
+                    selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                    textArea.setSelectionRange(0, 999999);
+
+                    document.contentEditable = oldContentEditable;
+                    document.readOnly = oldReadOnly;
+                } else {
+                    textArea.select();
+                }
+
+
+
+            }
+
+            function copyToClipboard() {
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            }
+
+            copy = function (text) {
+                createTextArea(text);
+                selectText();
+                copyToClipboard();
+            };
+
+            return {
+                copy: copy
+            };
+        })(window, document, navigator);
+
+
+
+
+        function copytext() {
+            window.Clipboard.copy('a1256212562@gmail.com');
+
+            var v = document.getElementById("&");
+            window.setTimeout(function () {
+                v.innerHTML = "Success<br>拷貝完成";
+                v.style.color = "#eee";
+                v.style.background = "#555";
+                v.style.border = "2px solid #555";;
+            }, 100);
+
+            window.setTimeout(function () {
+                v.innerHTML = "Copy<br>拷貝信箱";
+                v.style.color = "#555";
+                v.style.background = "none";
+                v.style.border = "2px outset #eee";
+            }, 3000);
+        }
+
+
+    </script>
+
+
+
+    <link rel="shortcut icon" href="https://i.pinimg.com/236x/b3/b5/f5/b3b5f5e2a8eb765eb55cc7ce023d5329.jpg">
+    <link rel="alternate" type="application/rss+xml" href="{RSS}" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Bungee+Outline|Fascinate+Inline|Londrina+Shadow|Londrina+Sketch|Poiret+One|Russo+One"
+        rel="stylesheet" />
+
+    <meta charset="utf-8">
+    </meta>
+    <meta name="google-site-verification" content="aDgAvOQxngD11hrxOs3_2cBTOI2zG8S82RGCLOzx4aM" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+
+
+
+
+    <style>
+        body {
+            display: none;
+            background-color: none;
+        }
+
+        a {
+            display: block;
+            font-family: 'Poiret One', Microsoft JhengHei, sans-serif;
+            text-decoration: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        span {
+            font-family: 'Poiret One', Microsoft JhengHei, sans-serif;
+            text-decoration: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        div {
+            text-decoration: none;
+
+        }
+
+
+        .button {
+            cursor: pointer;
+            display: inline-block;
+            margin: 2em 1em;
+            width: 7.2em;
+
+            color: #555;
+            background: none;
+            padding: 3px;
+
+            border: 2px outset #eee;
+            border-radius: 0.7em;
+
+            font-family: 'Poiret One', Microsoft JhengHei, sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-align: center;
+
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+
+            -webkit-appearance: none;
+            /* Safari 和 Chrome，常用於iOS下移除內建樣式 */
+            -moz-appearance: none;
+            /* FireFox */
+            appearance: none;
+        }
+
+        .button:Hover {
+            color: #000;
+            border: 2px outset #999;
+        }
+
+        .button:Active {
+            color: #777;
+            border: 2px inset #eee;
+        }
+
+        /*---桌上型電腦設定---*/
+
+
+
+
+        /*---主選單底層白色---*/
+
+
+
+        .MenuBace {
+            position: fixed;
+            top: -5em;
+            height: 120%;
+            width: 16em;
+            z-index: 9;
+            opacity: 0;
+
+            transition: .3s;
+
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1)50%, rgba(255, 255, 255, .85)78%, rgba(255, 255, 255, .6)78.01%, rgba(255, 255, 255, .4)90%, rgba(255, 255, 255, .3)90.01%, rgba(255, 255, 255, .2)0%);
+            background: -moz-linear-gradient(0deg, rgba(255, 255, 255, 1)50%, rgba(255, 255, 255, .85)78%, rgba(255, 255, 255, .6)78.01%, rgba(255, 255, 255, .4)90%, rgba(255, 255, 255, .3)90.01%, rgba(255, 255, 255, .2)0%);
+            background: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 1)50%, rgba(255, 255, 255, .85)78%, rgba(255, 255, 255, .6)78.01%, rgba(255, 255, 255, .4)90%, rgba(255, 255, 255, .3)90.01%, rgba(255, 255, 255, .2)0%);
+            background: -o-linear-gradient(0deg, rgba(255, 255, 255, 1)50%, rgba(255, 255, 255, .85)78%, rgba(255, 255, 255, .6)78.01%, rgba(255, 255, 255, .4)90%, rgba(255, 255, 255, .3)90.01%, rgba(255, 255, 255, .2)0%);
+        }
+
+
+
+        /*---主選單整體固定位置---*/
+        .Menu {
+            position: fixed;
+            margin: 1em 0 0 1em;
+            z-index: 10;
+        }
+
+        /*---主選單浮窗---*/
+        .MenuIcon {
+            width: 44px;
+            height: 44px;
+            background-color: none;
+            transition: .3s;
+            transition-delay: 0s;
+            opacity: 0.6;
+        }
+
+        /*---主選單按鈕---*/
+        .MenuButton {
+            cursor: pointer;
+            padding: 0.5em 1em;
+            border: 1px inset #fff;
+            border-radius: 0.7em;
+            color: #555;
+            display: block;
+
+            font-weight: bold;
+            font-size: 120%;
+            letter-spacing: 3px;
+            text-align: center;
+            line-height: 22px;
+
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
+            transition-delay: 0s;
+            background: none;
+        }
+
+        .MenuButton:Hover {
+            color: #aaa;
+            background: #111;
+            border: 1px double #222;
+        }
+
+
+
+
+        .MenuBranch {
+            position: relative;
+            height: 0px;
+            width: 7em;
+            left: .5em;
+            padding: 0 0 0 0;
+            margin: -4.5px 0;
+
+            display: block;
+            color: #555;
+
+            border-radius: 0.7em;
+
+            font-weight: bold;
+            font-size: 120%;
+            letter-spacing: 0px;
+            text-align: center;
+
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
+            transition-delay: 0s;
+
+        }
+
+
+
+        .MenuBranch:Hover {
+            color: #aaa;
+            background: #111;
+        }
+
+
+
+
+
+
+
+        /*---圖片底盤(左留邊/置中用)---*/
+        .imageBace {
+            position: relative;
+            left: 1.7em;
+            width: 90%;
+            text-align: center;
+        }
+
+        /*---圖片樣式---*/
+        img {
+            width: 100%;
+            max-width: 450px;
+            display: inline-block;
+            transition: .3s;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+        /*---中文文字樣式---*/
+
+        .chinese {
+            margin: 0 0 0 10px;
+            font-size: small;
+            letter-spacing: 12px;
+        }
+
+
+
+        .tiltepadding {
+            padding-top: calc(12% + 8em);
+            margin-bottom: calc(20% + 5em);
+
+            font-size: 33px;
+            letter-spacing: 20px;
+        }
+
+
+        .headicon {
+            width: 200px;
+            padding-right: 1em;
+        }
+
+
+        .aboutpadding {
+            position: relative;
+            left: 7%;
+            width: 90%;
+            text-align: center;
+            padding-top: calc(10em - 3%);
+
+        }
+
+        /*---中文文字樣式---*/
+
+        .chinese {
+            margin: 0 0 0 10px;
+            font-size: small;
+            letter-spacing: 12px;
+        }
+
+
+        .BranchTr {
+            position: relative;
+            top: -1.4em;
+            left: .2em;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            transition: .3s;
+            opacity: 0;
+        }
+
+        .MenuBranch:Hover .BranchTr {
+            color: #aaa;
+            opacity: 1;
+            transition: .4s;
+        }
+
+        .BranchOr {
+            opacity: 1;
+            transition: .4s;
+        }
+
+        .MenuBranch:Hover .BranchOr {
+            color: #111;
+            opacity: 0;
+            transition: .3s;
+        }
+
+
+        .shareBace {
+            position: fixed;
+            right: -3.5em;
+            Bottom: 1.5em;
+            z-index: 9;
+
+            width: 3.5em;
+
+            opacity: 1;
+            transition: .3s;
+            background: #777;
+
+        }
+
+        .icon {
+            position: relative;
+            width: 36px;
+            opacity: 0;
+            margin: .5em;
+            left: -20px;
+
+            transition: .5s;
+            transition-delay: 0s;
+            visibility: hidden;
+        }
+
+        .iconHover {
+            transition: .5s;
+            opacity: .4;
+        }
+
+        .iconHover:Hover {
+            z-index: 99;
+            opacity: .8;
+        }
+
+        .IconTrigger {
+            display: block;
+            position: absolute;
+            text-align: center;
+            height: 2em;
+            width: 2em;
+
+            margin: .5em;
+            left: -3.5em;
+            bottom: 0em;
+
+            background-color: none;
+            transition: .3s;
+            transition-delay: .5s;
+            opacity: 0.3;
+            pointer-events: visible;
+        }
+    </style>
+</head>
+
+
+<body onscroll="SwitchOff()" ondragstart="return false">
+
+    <div name="@" class="MenuBace"></div>
+    <div class="Menu">
+        <div onmouseover="SwitchOn()" onclick="SwitchOn()" class="MenuIcon">
+            <img src="https://i.imgur.com/DoTRxDr.png">
+        </div>
+
+        {{ .Home }}
+        <span>Home</span><br>
+        <span class="chinese"> 首頁</span></a>
+
+        <a name="#" onclick="BranchSwitch()" class="MenuButton">
+            <span>Animation</span><br>
+            <span class="chinese"> 動畫作品</span></a>
+
+        {{ .Animation2D }}
+        <span class="BranchOr">2D Animation</span>
+        <span class="BranchTr"><br>
+            手繪動畫</span>
+        </a>
+        {{ .AnimationSpine }}
+        <span class="BranchOr"> Spine</span>
+        <span class="BranchTr"><br>
+            骨架動畫</span>
+        </a>
+        {{ .AnimationFX }}
+        <span class="BranchOr"> FX Animation</span>
+        <span class="BranchTr"><br>
+            手繪特效</span>
+        </a>
+        {{ .Animation3D }}
+        <span class="BranchOr"> 3D Animation</span>
+        <span class="BranchTr"><br>
+            電腦動畫</span>
+        </a>
+
+
+        {{ .Illustration }}
+        <span>Illustration</span><br>
+        <span class="chinese"> 插畫作品</span></a>
+
+        {{ .Sketch }}
+        <span>Sketch</span><br>
+        <span class="chinese"> 手繪草圖</span></a>
+
+
+    </div>
+
+
+
+    <!--- 分享社群按鈕 --->
+
+    <div class="shareBace">
+        <!--- FB --->
+        <div class="iconHover">
+            <a href="https://www.facebook.com/yanun0323/">
+                <img name="#2" class="icon" style="transition-delay:.1s;"
+                    src="https://i.pinimg.com/originals/7b/ee/be/7beebee66e543e17433b81c50de44ba4.png">
+        </div>
+        <!--- Twitter --->
+        <div class="iconHover">
+            <a href="https://twitter.com/yanunanimation">
+                <img name="#2" class="icon" style="transition-delay:.2s;"
+                    src="https://i.pinimg.com/originals/bf/ba/69/bfba692b42c0993319ac1d9c15d0e03a.png">
+        </div>
+        <!--- IG --->
+        <div class="iconHover">
+            <a href="https://www.instagram.com/yanun.animation/">
+                <img name="#2" class="icon" style="transition-delay:.3s;"
+                    src="https://i.pinimg.com/originals/71/67/dc/7167dc49b09435267d2a7445006afda2.png">
+        </div>
+        <!--- Vimeo
+    <div class="iconHover">
+    <a href="https://vimeo.com/papayanun">
+      <img name="#2" class="icon" style="transition-delay:.4s;" src="https://i.pinimg.com/originals/11/93/c4/1193c4886574da872234149592e57973.png">
+    </div> --->
+
+        <!--- Trigger --->
+        <img name="@2" onmouseover="IconSwitchOn()" onclick="IconSwitchOn()" class="IconTrigger"
+            src="https://i.pinimg.com/originals/e3/b6/03/e3b603b3100fec36b955dcf03e62a851.png">
+
+    </div>
+
+    <!--- END 分享社群按鈕 --->
+
+
+    <div class="aboutpadding" onclick="SwitchOff()">
+        <a><img class="headicon" src="https://i.pinimg.com/564x/b1/88/39/b188398b76817043f5f3f7979554cd78.jpg" />
+        </a>
+
+        <br>
+        <a style="color:#666; font-size:30px; letter-spacing:20px;font-weight:300;">
+            楊永煜<br></a>
+        <a style="color:#666; font-size:20px; letter-spacing:6px;;font-weight:800;">
+            Yanun　Yang
+
+            <br><br><br>
+            <span style="color:#888; font-size:14px; 
+                 letter-spacing:6px; font-weight:400;">
+                <span style="font-weight:600;">
+                    2D</span>動畫師 </span><br>
+            <span style="color:#888; font-size:12px; 
+                 letter-spacing:2px; font-weight:600;">
+                A 2D animator from Taiwan. </span>
+
+            <br>
+            <br>
+            <br>
+
+            <div style="margin:0 auto; color:#ccc;">—</div>
+            <!----------------------------------------------------------------------------->
+            <!----------------------------------------------------------------------------->
+            <!----------------------------------------------------------------------------->
+            <!----------------------------------------------------------------------------->
+
+            <br><br>
+
+            <div style="padding-left:2em;">
+                <!--- 內文) --->
+
+
+
+
+
+
+                <div>
+                    <!--- 專長div (包含內文) --->
+                    <span style="color:#599; font-size:17px; font-weight:500; 
+                     letter-spacing:20px; line-height:30px">
+                        專長
+                    </span>
+
+                    <br>
+                    <div style="padding-right:35px;">
+                        <span style="color:#488; font-size:17px; font-weight:500; 
+                     letter-spacing:6px; line-height:20px">
+                            Skills
+                        </span>
+                    </div>
+
+                    <div style="position:relative; width:.1em; margin:0 auto;
+                    top:0.5em; text-align:left">
+                        <!--- 這個div是讓下層div的position固定用的 --->
+
+                        <div style="position:absolute; width:15em; text-align:left;
+                        left: 0em;">
+                            <span style="color:#599; font-size:16px; font-weight:600;
+                letter-spacing:4px; line-height:30px">
+                                Storyboard<br>
+                                Key animation<br>
+                                Hand-drawn effect<br>
+                                Spine animation<br>
+                            </span>
+                        </div>
+
+                        <div style="position:relative; width:15em; left:-9em">
+                            <span style="color:#599; font-size:16px; font-weight:300;
+                letter-spacing:6px; line-height:30px">
+                                分鏡腳本<br>
+                                動畫原畫<br>
+                                手繪特效<br>
+                                <span style="font-weight:600">
+                                    2D</span>骨架動畫<br>
+
+                            </span>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!--- 結束 專長div (包含內文) --->
+
+                <br>
+                <br>
+                <br>
+
+                <div>
+                    <!--- 經歷div (包含內文) --->
+                    <span style="color:#666; font-size:17px; font-weight:500; 
+                     letter-spacing:20px; line-height:30px">
+                        經歷
+                    </span>
+
+                    <br>
+                    <div style="padding-right:35px;">
+                        <span style="color:#666; font-size:17px; font-weight:500; 
+                     letter-spacing:6px; line-height:20px">
+                            experience
+                        </span>
+                    </div>
+
+                    <div style="position:relative; width:100%; margin:1em auto;
+                    top:0.5em; text-align:left; 
+                    color:#666; font-size:16px; font-weight:300;
+                    letter-spacing:6px;line-height:30px">
+                        <!--- 這個div是讓下層div的position固定用的 --->
+
+                        <div style="position:absolute; width:15em; text-align:left;
+                        left: calc(50% - 25em); letter-spacing:2px;
+                        font-size:12px; font-weight:300; color: #aaa;
+                        font-family: Microsoft JhengHei; text-align:center
+                        
+                        ;display:none">
+                            2018 ~ <br>
+                            2019<br>
+                            2017<br>
+                            2017<br>
+                            2016 ~ 2017<br>
+                            2016<br>
+                        </div>
+
+                        <div style="position:absolute; width:15em; text-align:left;
+                        left: calc(50% - 14em);">
+                            <span id="0100" onmouseout="OverChage(this.id,'艾鳴遊戲公司')"
+                                onmouseover="OverChage(this.id,'2018~2020',1)">
+                                艾鳴遊戲公司</span><br>
+                            九族文化村 動畫專案<br>
+                            無肝者動畫工作室<br>
+                            <span style="font-weight:600">
+                                Viridisio</span> 動畫專案<br>
+                            <span style="font-weight:600">
+                                Retreat</span> 動畫專案<br>
+                            鈺昇動畫公司<br>
+                        </div>
+
+                        <div style="position:relative; width:15em; left:calc(50% + 2em)">
+                            角色動畫/特效設計<br>
+                            動畫導演<br>
+                            第一原畫<br>
+                            動畫導演<br>
+                            動畫導演/原畫<br>
+                            動畫原畫<br>
+
+                        </div>
+                    </div>
+                    <!--- 結束 經歷div (包含內文) --->
+
+
+
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <span style="color:#599; font-size:17px; font-weight:500; 
+                     letter-spacing:20px; line-height:20px">
+                    <br>
+                    軟體<br></span>
+                <div style="padding-right:12px;">
+                    <span style="color:#488; font-size:17px; font-weight:500; 
+                     letter-spacing:6px; line-height:20px">
+                        Software
+                    </span>
+                </div>
+
+                <div style="position:relative; width:.1em; margin:0 auto;
+                    top:0.5em; text-align:left">
+                    <!--- 這個div是讓下層div的position固定用的 --->
+
+                    <div style="position:absolute; width:2em; text-align:left;
+                        left: 3em;">
+                        <span style="color:#599; font-size:16px; font-weight:100;
+                letter-spacing:2px;line-height:30px">
+                            ■■■■<br>
+                            ■■■■<br>
+                            ■■■□<br>
+                            ■■□□<br>
+                            ■■□□<br>
+                        </span>
+                    </div>
+
+                    <div style="position:relative; width:8em; left:-6.5em">
+                        <span style="color:#599; font-size:14px; font-weight:700;
+                letter-spacing:6px; line-height:30px">
+                            ＃TVPaint<br>
+                            ＃Spine<br>
+                            ＃Photoshop<br>
+                            ＃AfterEffct<br>
+                            ＃Maya<br>
+
+                        </span>
+
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <br>
+
+
+                <div style="margin:0 auto; color:#ccc;">—</div>
+                <!----------------------------------------------------------------------------->
+                <!----------------------------------------------------------------------------->
+                <!----------------------------------------------------------------------------->
+                <!----------------------------------------------------------------------------->
+
+                <br>
+                <br>
+                <br>
+
+
+                <a style="font-weight:500; color:#444; letter-spacing:4px; line-height:20px">
+                    E-mail：
+                    <br><br>
+                    <span>
+                        a1256212562@gmail.com<br>
+                    </span></a>
+
+
+                <div style="position:relative; z-index:9">
+
+                    <a id="&" onclick="copytext()" class="button">
+                        <span>Copy</span><br>
+                        拷貝信箱
+                    </a>
+                    <a class="button" href="mailto:a1256212562@gmail.com">
+                        <span>Send mail</span><br>
+                        傳送郵件
+                    </a>
+
+                </div>
+
+                <a><br><br>
+
+                    <br></a>
+
+
+                <div style="margin-top:20%; color:#999; font-size:14px; letter-spacing:2px; font-weight:500">
+                    <a>This site is made by Yanun<br><br><br></a>
+                </div>
+            </div>
+
+    </div>
+
+
+</body>
+
+</html>

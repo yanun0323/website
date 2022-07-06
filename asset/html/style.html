@@ -1,0 +1,100 @@
+{{ define "style" }}
+<style>
+    :root {
+        --title: rgba(36, 41, 47);
+        --quote-shadow: rgba(208, 215, 220);
+        --code-shadow: rgba(239, 241, 243);
+        --block-shadow: rgba(246, 248, 250);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    body {
+        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    h1,
+    h2 {
+        word-spacing: -5px;
+        color: var(--title);
+        border-bottom: 1px var(--quote-shadow) solid;
+        padding-bottom: 5px;
+        margin-top: 70px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    blockquote {
+        font-size: 20px;
+        display: block;
+        color: #666661;
+        border-left: 4px var(--quote-shadow) solid;
+        padding-left: 30px;
+        margin: 0;
+        line-height: 30px;
+    }
+
+    code {
+        display: inline-block;
+        color: black;
+        padding: 1px 5px;
+        margin: 1px 3px;
+        background-color: var(--code-shadow);
+        border: 1px #f1f1f1 solid;
+        border-radius: 3px;
+        font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono;
+        line-height: 25px;
+    }
+
+    .markdown {
+        display: inline-table;
+        font-size: 18px;
+        font-weight: 400;
+        font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        padding-left: 30px;
+    }
+
+    .language-go {
+        color: rgb(169, 169, 49);
+        padding: 10px;
+        margin: 10px;
+        background-color: var(--block-shadow);
+    }
+
+
+    .sidebar {
+        display: inline-table;
+        position: fixed;
+        width: 20%;
+    }
+
+    .sidebar-base {
+        position: static;
+        height: 10%;
+        opacity: 0;
+    }
+
+    .sidebar-button {
+        display: block;
+        font-size: 20px;
+        padding-bottom: 0;
+        height: 30px;
+        margin: 20px auto;
+        background-color: transparent;
+        border: 1px transparent solid;
+    }
+
+    .sidebar-button:hover {
+        /* background-color: #eee; */
+        border-bottom: 1px gray solid;
+    }
+</style>
+{{ end }}
