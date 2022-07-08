@@ -13,7 +13,7 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
-		e.Start(":80")
+		e.Start(":8080")
 	}()
 
 	for {
@@ -23,7 +23,7 @@ func main() {
 			e := app.Run()
 			ch <- e
 			c.Close()
-			e.Start(":80")
+			e.Start(":8080")
 		}()
 	}
 }

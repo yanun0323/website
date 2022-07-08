@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"strings"
 	"website/internal/domain"
+	"website/pkg/config"
 	"website/util"
 
 	"github.com/labstack/echo/v4"
@@ -125,14 +126,22 @@ func url(host, name string) string {
 
 func getButtonString(list []string) string {
 	result := make([]byte, 0, 30)
+
+	result = append(result, []byte(getHomeButtonStr())...)
 	for _, str := range list {
 		result = append(result, []byte(getButtonStr(str))...)
 	}
 	return string(result)
 }
 
+func getHomeButtonStr() string {
+	return `<a href="` + config.SITE_ADDRESS + `">
+        <button class="sidebar-button sidebar-font-medium"> Home </button>
+    </a>`
+}
+
 func getButtonStr(name string) string {
-	return `<a id="0" href="http://localhost:8080/` +
+	return `<a id="0" href="` +
 		name + `"><button class="sidebar-button sidebar-font-small">` +
 		"・" + name + ` </button></a>`
 }
