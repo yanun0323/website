@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/labstack/echo/v4 v4.7.2
-	github.com/robfig/cron/v3 v3.0.1
 	github.com/yuin/goldmark v1.4.12
 	github.com/yuin/goldmark-highlighting v0.0.0-20220208100518-594be1970594
 )
