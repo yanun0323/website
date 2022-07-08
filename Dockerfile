@@ -22,7 +22,7 @@ COPY --from=build /go/build/asset/template /var/application/asset/template
 # 指定時區，否則會用 GMT
 ENV TZ Asia/Taipei
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apk add libcap && setcap 'cap_net_bind_service=+ep' /var/application/bel
+RUN apk add libcap && setcap 'cap_net_bind_service=+ep' /var/application/website
 EXPOSE 80
 
 WORKDIR /var/application
