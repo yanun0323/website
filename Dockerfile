@@ -6,7 +6,13 @@ WORKDIR /go/build
 RUN go build -o website ./main.go
 
 # final stage
-FROM golang:alpine3.15
+FROM alpine:3.15
+
+RUN apk add openssl --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/main && \
+    #apk add librdkafka=1.1.0-r0 --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community && \
+    apk add --no-cache ca-certificates && \
+    apk add --no-cache tzdata && \
+    apk del openssl && rm -f /var/cache/apk/*
 
 COPY --from=build /go/build/website /var/application/website
 COPY --from=build /go/build/asset/html /var/application/asset/html
