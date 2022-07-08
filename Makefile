@@ -7,6 +7,7 @@ build:	## Build backend Docker image
 	docker build . \
 		-t website \
 		--no-cache \
+		--platform linux/amd64 \
 
 docker.run:
 	docker run -d \
