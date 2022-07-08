@@ -2,8 +2,6 @@
 
 紀錄如何在 VSCode 上設置 Swift 開發所需的環境
 
-[link](#apple-swift-format)
-
 ## 安裝 VSCode Extension
 
 - [**Swift**](https://marketplace.visualstudio.com/items?itemName=sswg.swift-lang) - apple 開發者維護的 extension
@@ -28,7 +26,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 4. 安裝 apple 官方 format
 
-```go
+```
 mint install apple/swift-format@release/{VERSION}
 /* {VERSION}= 5.6 or others */
 ```

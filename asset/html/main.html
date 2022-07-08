@@ -2,6 +2,15 @@
 <html>
 <header>
     <meta charset="utf-8">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[class=markdown]').css('display', 'none');
+            $('[class=markdown]').delay(300);
+            $('[class=markdown]').fadeIn(600); //一開始淡入
+        });
+    </script>
 </header>
 
 {{ template "style" . }}

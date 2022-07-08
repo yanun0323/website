@@ -13,6 +13,10 @@
 
     body {
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        user-select: none;
     }
 
     h1,
@@ -32,6 +36,12 @@
         font-size: 30px;
     }
 
+    li,
+    ul,
+    ol {
+        margin: 10px 0;
+    }
+
     blockquote {
         font-size: 20px;
         display: block;
@@ -42,16 +52,29 @@
         line-height: 30px;
     }
 
-    code {
-        display: inline-block;
-        color: black;
-        padding: 1px 5px;
-        margin: 1px 3px;
+    pre {
+        padding: 10px 5px;
+        border-radius: 5px;
         background-color: var(--code-shadow);
-        border: 1px #f1f1f1 solid;
+
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -o-user-select: text;
+        user-select: text;
+    }
+
+    code {
+        font-size: 15px;
+        display: inline-block;
+        padding: 1px 5px;
         border-radius: 3px;
         font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono;
         line-height: 25px;
+        background-color: var(--code-shadow);
+    }
+
+    pre code {
+        background-color: transparent;
     }
 
     .markdown {
@@ -62,23 +85,16 @@
         padding-left: 30px;
     }
 
-    .language-go {
-        color: rgb(169, 169, 49);
-        padding: 10px;
-        margin: 10px;
-        background-color: var(--block-shadow);
-    }
-
 
     .sidebar {
         display: inline-table;
         position: fixed;
-        width: 20%;
+        width: 300px;
     }
 
     .sidebar-base {
         position: static;
-        height: 10%;
+        height: 10px;
         opacity: 0;
     }
 
