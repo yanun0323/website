@@ -8,14 +8,16 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Run() {
+func Run() *echo.Echo {
 
 	e := echo.New()
+	e.Logger.SetLevel(4)
+
 	svc := service.NewService(repository.NewRepo())
 
 	rateLimiter := middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(20))
 	svc.SetHomePage(e, rateLimiter)
 	svc.SetAllArticlePage(e, rateLimiter)
 
-	e.Logger.Fatal(e.Start(":8080"))
+	return e
 }
