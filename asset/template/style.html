@@ -13,6 +13,7 @@
 
     body {
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
         -webkit-user-select: none;
         -moz-user-select: none;
         -o-user-select: none;
@@ -44,7 +45,6 @@
 
     blockquote {
         font-size: 20px;
-        display: block;
         color: #666661;
         border-left: 4px var(--quote-shadow) solid;
         padding-left: 30px;
@@ -53,9 +53,10 @@
     }
 
     pre {
-        padding: 10px 5px;
+        padding-left: 30px;
         border-radius: 5px;
         background-color: var(--code-shadow);
+        line-height: 25px;
 
         -webkit-user-select: text;
         -moz-user-select: text;
@@ -65,11 +66,9 @@
 
     code {
         font-size: 15px;
-        display: inline-block;
         padding: 1px 5px;
         border-radius: 3px;
         font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono;
-        line-height: 25px;
         background-color: var(--code-shadow);
     }
 
@@ -78,24 +77,19 @@
     }
 
     .markdown {
-        display: inline-table;
         font-size: 18px;
         font-weight: 400;
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         padding-left: 30px;
+        width: 70%;
+        margin-left: 300px;
     }
 
 
     .sidebar {
-        display: inline-table;
         position: fixed;
+        top: 5%;
         width: 300px;
-    }
-
-    .sidebar-base {
-        position: static;
-        height: 10px;
-        opacity: 0;
     }
 
     .sidebar-font-medium {
