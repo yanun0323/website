@@ -11,7 +11,7 @@ FROM golang:alpine3.15
 COPY --from=build /go/build/website /var/application/website
 COPY --from=build /go/build/asset/html /var/application/asset/html
 COPY --from=build /go/build/asset/html/portfolio /var/application/asset/html/portfolio
-COPY --from=build /go/build/asset/markdown /var/application/asset/markdown
+COPY --from=build /go/build/asset/template /var/application/asset/template
 
 EXPOSE 8080
 
