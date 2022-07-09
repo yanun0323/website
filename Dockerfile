@@ -22,7 +22,7 @@ RUN apk add openssl --no-cache --repository http://dl-3.alpinelinux.org/alpine/e
 
 RUN apk add libcap && setcap 'cap_net_bind_service=+ep' /var/application/website
 
-EXPOSE 80
+EXPOSE 443
 
 WORKDIR /var/application
 CMD [ "./website" ]
