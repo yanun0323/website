@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if err := config.Init("config"); err != nil {
-		log.Default().Fatal("init config failed")
+		log.Default().Fatalf("init config failed %w", err)
 		return
 	}
 	// crt := viper.GetString("server.crt")
