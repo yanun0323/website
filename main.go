@@ -28,6 +28,7 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
+		LOG.Fatal(e.StartTLS(":80", crt, key))
 	}()
 
 	for {
