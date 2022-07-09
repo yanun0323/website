@@ -7,3 +7,5 @@
 
 # Others
 *.yaml
+*.crt
+*.key
