@@ -16,8 +16,9 @@ func Run() *echo.Echo {
 	svc := service.NewService(repository.NewRepo())
 
 	rateLimiter := middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(20))
-	svc.SetHomePage(e, rateLimiter)
-	svc.SetAllArticlePage(e, rateLimiter)
+	m := []echo.MiddlewareFunc{rateLimiter, middleware.WWWRedirect(), middleware.HTTPSRedirect()}
+	svc.SetHomePage(e, m...)
+	svc.SetAllArticlePage(e, m...)
 
 	return e
 }
