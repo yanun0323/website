@@ -7,7 +7,6 @@ import (
 	"website/pkg/config"
 
 	"github.com/labstack/echo/v4"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -20,15 +19,16 @@ func main() {
 		LOG.Fatalf("init config failed %s", err)
 		return
 	}
-	crt := viper.GetString("server.crt")
-	key := viper.GetString("server.key")
+	// crt := viper.GetString("server.crt")
+	// key := viper.GetString("server.key")
 
 	ch := make(chan *echo.Echo, 1)
 
 	go func() {
 		e := app.Run()
 		ch <- e
-		LOG.Fatal(e.StartTLS(":443", []byte(crt), []byte(key)))
+		LOG.Fatal(e.StartAutoTLS(":443"))
+		// LOG.Fatal(e.StartTLS(":443", []byte(crt), []byte(key)))
 	}()
 
 	for {
@@ -38,7 +38,8 @@ func main() {
 			e := app.Run()
 			ch <- e
 			LOG.Fatal(c.Close())
-			LOG.Fatal(e.StartTLS(":443", []byte(crt), []byte(key)))
+			LOG.Fatal(e.StartAutoTLS(":443"))
+			// LOG.Fatal(e.StartTLS(":443", []byte(crt), []byte(key)))
 		}()
 	}
 }
