@@ -28,7 +28,7 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
-		LOG.Fatal(e.StartTLS(":80", crt, key))
+		LOG.Fatal(e.StartTLS(":80", []byte(crt), []byte(key)))
 	}()
 
 	for {
@@ -38,7 +38,7 @@ func main() {
 			e := app.Run()
 			ch <- e
 			LOG.Fatal(c.Close())
-			LOG.Fatal(e.StartTLS(":80", crt, key))
+			LOG.Fatal(e.StartTLS(":80", []byte(crt), []byte(key)))
 		}()
 	}
 }
