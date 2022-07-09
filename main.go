@@ -25,7 +25,7 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
-		LOG.Fatal(e.StartAutoTLS(":8443"))
+		LOG.Fatal(e.StartAutoTLS(":443"))
 	}()
 
 	for {
@@ -35,7 +35,7 @@ func main() {
 			e := app.Run()
 			ch <- e
 			LOG.Fatal(c.Close())
-			LOG.Fatal(e.StartAutoTLS(":8443"))
+			LOG.Fatal(e.StartAutoTLS(":443"))
 		}()
 	}
 }
