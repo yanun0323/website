@@ -74,20 +74,11 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	http.HandleFunc("/", sayhelloName) //設定存取的路由
+	//設定監聽的埠
 
-	//設定監聽的埠
-	go func() {
-		if err := http.ListenAndServe("127.0.0.1:80", nil); err != nil {
-			fmt.Println(err)
-			log.Fatal("ListenAndServe: ", err)
-		}
-	}()
-	//設定監聽的埠
-	go func() {
-		if err := http.ListenAndServe("127.0.0.1:8080", nil); err != nil {
-			fmt.Println(err)
-			log.Fatal("ListenAndServe: ", err)
-		}
-	}()
+	if err := http.ListenAndServe("127.0.0.1:8080", nil); err != nil {
+		fmt.Println(err)
+		log.Fatal("ListenAndServe: ", err)
+	}
 
 }
