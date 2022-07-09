@@ -78,7 +78,7 @@ func main() {
 	err := http.ListenAndServe(":80", nil) //設定監聽的埠
 
 	if err != nil {
-
+		fmt.Println(err)
 		log.Fatal("ListenAndServe: ", err)
 
 	}
