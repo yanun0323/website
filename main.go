@@ -75,12 +75,11 @@ func main() {
 
 	http.HandleFunc("/", sayhelloName) //設定存取的路由
 
-	err := http.ListenAndServe(":80", nil) //設定監聽的埠
+	err := http.ListenAndServe(":8080", nil) //設定監聽的埠
 
 	if err != nil {
 		fmt.Println(err)
 		log.Fatal("ListenAndServe: ", err)
-
 	}
 
 }
