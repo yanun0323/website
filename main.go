@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"time"
 	"website/internal/app"
@@ -10,13 +11,15 @@ import (
 )
 
 var (
-	LOG *log.Logger
+	l   *log.Logger
+	ctx context.Context
 )
 
 func main() {
-	LOG = log.Default()
+	l = log.Default()
+	ctx = context.Background()
 	if err := config.Init("config"); err != nil {
-		LOG.Fatalf("init config failed %s", err)
+		l.Fatalf("init config failed %s", err)
 		return
 	}
 
@@ -25,7 +28,8 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
-		LOG.Fatal(e.StartAutoTLS(":443"))
+		l.Fatal(e.Start(":80"))
+		// l.Fatal(e.StartAutoTLS(":443"))
 	}()
 
 	for {
@@ -34,8 +38,9 @@ func main() {
 			c := <-ch
 			e := app.Run()
 			ch <- e
-			LOG.Fatal(c.Close())
-			LOG.Fatal(e.StartAutoTLS(":443"))
+			l.Fatal(c.Shutdown(ctx))
+			l.Fatal(e.Start(":80"))
+			// l.Fatal(e.StartAutoTLS(":443"))
 		}()
 	}
 }

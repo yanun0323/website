@@ -10,7 +10,7 @@ build:	## Build backend Docker image
 
 docker.run:
 	docker run -d \
-	-p 443:443 \
+	-p 80:80 \
 	--name website website
 
 docker.up:
