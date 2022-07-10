@@ -39,9 +39,13 @@ type Service struct {
 }
 
 func NewService(repo domain.IRepository) Service {
+	l := log.Default()
 	_GITHUB_MD_LIST_URL = viper.GetString("resource.list")
 	_GITHUB_MD_URL = viper.GetString("resource.markdown")
 	_SITE_URL = viper.GetString("server.site.url")
+	l.Print(_GITHUB_MD_LIST_URL)
+	l.Print(_GITHUB_MD_URL)
+	l.Print(_SITE_URL)
 
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
@@ -68,7 +72,7 @@ func NewService(repo domain.IRepository) Service {
 		template: template.Must(template.ParseFiles(files...)),
 		mdReader: md,
 		repo:     repo,
-		l:        log.Default(),
+		l:        l,
 		list:     ls,
 		btn:      getButtonString(ls),
 	}
