@@ -91,24 +91,59 @@
         background-color: var(--block-shadow);
     }
 
+    .trigger {
+        transition: 0.3s;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 1000px;
+        background-color: var(--quote-shadow);
+        opacity: 1;
+    }
+
+    .trigger:hover {
+        transition-delay: 0.3s;
+        opacity: 0;
+    }
+
     .markdown {
         font-size: 16px;
         font-weight: 400;
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
         /* width: 70%; */
-        margin-left: 300px;
+        margin-left: 100px;
         margin-right: 5%;
     }
 
 
     .sidebar {
+        transition-duration: 0.3s;
+
         position: fixed;
         top: 0;
-        left: 0;
-        width: 250px;
+        left: -300px;
+        width: 300px;
         height: 2000px;
         padding: 3% 0.8em 0 1%;
         background-color: white;
+        opacity: 0;
+    }
+
+    .sidebar:hover {
+        left: 0px;
+        opacity: 0.95;
+    }
+
+    .trigger:hover+.sidebar {
+        left: 0px;
+        opacity: 0.95;
+    }
+
+    .a:active+.sidebar {
+        left: -300px;
+        opacity: 0;
     }
 
     .sidebar-button {
