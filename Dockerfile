@@ -21,7 +21,7 @@ COPY --from=build /go/build/asset/template /var/application/asset/template
 #     apk del openssl && rm -f /var/cache/apk/*
 # RUN apk add libcap && setcap 'cap_net_bind_service=+ep' /var/application/website
 
-EXPOSE 80
+EXPOSE 8080
 
 WORKDIR /var/application
 CMD [ "./website" ]
