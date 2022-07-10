@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	SITE_ADDRESS = "https://localhost/"
+	SITE_ADDRESS = "http://0.0.0.0:8080/"
 )
 
 func Init(configName string) error {
