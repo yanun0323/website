@@ -2,10 +2,12 @@ package service
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"website/internal/domain"
 	"website/util"
@@ -19,13 +21,14 @@ import (
 )
 
 const (
-	_GITHUB_TEMPLATE_DIR = "./internal/asset/template/"
+	_GITHUB_TEMPLATE_DIR = "./internal/resource/template/"
 )
 
 var (
-	_GITHUB_MD_LIST_URL = ""
-	_GITHUB_MD_URL      = ""
-	_SITE_URL           = ""
+	_GITHUB_TEMPLATE_URL = ""
+	_GITHUB_MD_LIST_URL  = ""
+	_GITHUB_MD_URL       = ""
+	_SITE_URL            = ""
 )
 
 type Service struct {
@@ -40,18 +43,35 @@ type Service struct {
 
 func NewService(repo domain.IRepository) Service {
 	l := log.Default()
+	_GITHUB_TEMPLATE_URL = viper.GetString("resource.template")
 	_GITHUB_MD_LIST_URL = viper.GetString("resource.list")
 	_GITHUB_MD_URL = viper.GetString("resource.markdown")
 	_SITE_URL = viper.GetString("server.site.url")
-	l.Print(_GITHUB_MD_LIST_URL)
-	l.Print(_GITHUB_MD_URL)
-	l.Print(_SITE_URL)
+
+	urls := []string{
+		util.Url(_GITHUB_TEMPLATE_URL, "main.html"),
+		util.Url(_GITHUB_TEMPLATE_URL, "style.html"),
+		util.Url(_GITHUB_TEMPLATE_URL, "sidebar.html"),
+		util.Url(_GITHUB_TEMPLATE_URL, "markdown.html"),
+	}
 
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
 		util.Url(_GITHUB_TEMPLATE_DIR, "style.html"),
 		util.Url(_GITHUB_TEMPLATE_DIR, "sidebar.html"),
 		util.Url(_GITHUB_TEMPLATE_DIR, "markdown.html"),
+	}
+
+	for i, u := range urls {
+		body, err := repo.GetTemplate(u)
+		if err != nil {
+			l.Println(fmt.Errorf("get template, %w", err))
+			continue
+		}
+		if err := downloadToLocal(files[i], body, true); err != nil {
+			l.Println(fmt.Errorf("download to local, %w", err))
+			continue
+		}
 	}
 
 	md := goldmark.New(
@@ -80,7 +100,7 @@ func NewService(repo domain.IRepository) Service {
 
 func (svc *Service) SetHomePage(e *echo.Echo, m ...echo.MiddlewareFunc) {
 	e.GET("/", func(c echo.Context) error {
-		url := url(_GITHUB_MD_URL, "home")
+		url := mdUrl(_GITHUB_MD_URL, "home")
 		html, err := svc.getMarkdownHtml(url)
 		if err != nil {
 			return c.HTML(http.StatusNotFound, err.Error())
@@ -97,7 +117,7 @@ func (svc *Service) SetAllArticlePage(e *echo.Echo, m ...echo.MiddlewareFunc) {
 
 func (svc *Service) setArticlePage(e *echo.Echo, name string, m ...echo.MiddlewareFunc) {
 	e.GET("/"+name, func(c echo.Context) error {
-		url := url(_GITHUB_MD_URL, name)
+		url := mdUrl(_GITHUB_MD_URL, name)
 		html, err := svc.getMarkdownHtml(url)
 		if err != nil {
 			return c.HTML(http.StatusNotFound, err.Error())
@@ -132,8 +152,41 @@ func (svc *Service) getMarkdownHtml(url string) (string, error) {
 	return strings.ReplaceAll(html.String(), `img src="./`, replace), nil
 }
 
-func url(host, name string) string {
+func mdUrl(host, name string) string {
 	return host + name + ".md"
+}
+
+func htmlUrl(host, name string) string {
+	return host + name + ".html"
+}
+
+func downloadToLocal(name string, data []byte, skipZero bool) error {
+	if skipZero && len(data) == 0 {
+		return nil
+	}
+
+	if len(data) == 0 {
+		return errors.New("data is empty")
+	}
+
+	f, err := os.OpenFile(name, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		return fmt.Errorf("open file %s, %w", name, err)
+	}
+	defer f.Close()
+
+	if err := f.Truncate(0); err != nil {
+		return fmt.Errorf("truncate file %s, %w", name, err)
+	}
+
+	if _, err := f.Seek(0, 0); err != nil {
+		return fmt.Errorf("seek file %s, %w", name, err)
+	}
+
+	if _, err := fmt.Fprintf(f, "%s", data); err != nil {
+		return fmt.Errorf("fprintf file %s, %w", name, err)
+	}
+	return nil
 }
 
 func getButtonString(list []string) string {

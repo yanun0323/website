@@ -3,6 +3,7 @@ package github
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -27,7 +28,12 @@ func (dao GithubDao) GetMarkdown(url string) ([]byte, error) {
 	return GetHttpBodyBuf(url)
 }
 
+func (dao GithubDao) GetTemplate(url string) ([]byte, error) {
+	return GetHttpBodyBuf(url)
+}
+
 func GetHttpBodyBuf(url string) ([]byte, error) {
+	log.Println("downloading file form: " + url)
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("get http file, %w", err)
