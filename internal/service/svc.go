@@ -58,16 +58,8 @@ func NewService(repo domain.IRepository) Service {
 		util.Url(_GITHUB_TEMPLATE_DIR, "style.html"),
 	}
 
-	for i, u := range urls {
-		body, err := repo.GetTemplate(u)
-		if err != nil {
-			l.Println(fmt.Errorf("get template, %w", err))
-			continue
-		}
-		if err := downloadToLocal(files[i], body, true); err != nil {
-			l.Println(fmt.Errorf("download to local, %w", err))
-			continue
-		}
+	if skip := viper.GetBool("test"); !skip {
+		downloadTemplate(repo, urls, files)
 	}
 
 	md := goldmark.New(
@@ -80,6 +72,7 @@ func NewService(repo domain.IRepository) Service {
 		goldmark.WithParser(goldmark.DefaultParser()),
 		goldmark.WithRendererOptions(
 			html.WithHardWraps(),
+			html.WithUnsafe(),
 		))
 
 	ls := repo.GetMarkdownList(_GITHUB_MD_LIST_URL)
@@ -156,7 +149,22 @@ func htmlUrl(host, name string) string {
 	return host + name + ".html"
 }
 
-func downloadToLocal(name string, data []byte, skipZero bool) error {
+func downloadTemplate(repo domain.IRepository, urls, files []string) {
+	l := log.Default()
+	for i, u := range urls {
+		body, err := repo.GetTemplate(u)
+		if err != nil {
+			l.Println(fmt.Errorf("get template, %w", err))
+			continue
+		}
+		if err := saveToLocal(files[i], body, true); err != nil {
+			l.Println(fmt.Errorf("download to local, %w", err))
+			continue
+		}
+	}
+}
+
+func saveToLocal(name string, data []byte, skipZero bool) error {
 	if skipZero && len(data) == 0 {
 		return nil
 	}
@@ -197,12 +205,11 @@ func getButtonString(list []string) string {
 
 func getHomeButtonStr() string {
 	return `<a href="` + _SITE_URL + `">
-        <button class="sidebar-button sidebar-font-medium"> Home </button>
+        <button class="sidebar-button sidebar-button-medium"> Home </button>
     </a>`
 }
 
 func getButtonStr(name string) string {
 	return `<a id="0" href="` +
-		name + `"><button class="sidebar-button sidebar-font-small">` +
-		"・" + name + ` </button></a>`
+		name + `"><button class="sidebar-button sidebar-button-small">` + name + ` </button></a>`
 }

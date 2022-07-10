@@ -76,40 +76,61 @@
         background-color: transparent;
     }
 
+    table {
+        font-size: 14px;
+        background-color: var(--quote-shadow);
+    }
+
+    th,
+    td {
+        padding: 20px 15px;
+        background-color: white;
+    }
+
+    td {
+        background-color: var(--block-shadow);
+    }
+
     .markdown {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-        padding-left: 30px;
-        width: 70%;
+        /* width: 70%; */
         margin-left: 300px;
+        margin-right: 5%;
     }
 
 
     .sidebar {
         position: fixed;
-        top: 5%;
-        width: 300px;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 2000px;
+        padding: 3% 0.8em 0 1%;
+        background-color: white;
     }
-
-    .sidebar-font-medium {
-        font-size: 20px;
-        margin: 10px 0 10px 10%;
-    }
-
-    .sidebar-font-small {
-        font-size: 14px;
-        margin-left: 12%;
-    }
-
 
     .sidebar-button {
         display: block;
-        padding-bottom: -5px;
-        height: 30px;
         background-color: transparent;
         border: 1px transparent solid;
     }
+
+    .sidebar-button-medium {
+        height: 40px;
+        font-size: 24px;
+        margin: 10px 10%;
+    }
+
+    .sidebar-button-small {
+        height: 25px;
+        padding: 5px 0 0 0;
+        font-size: 14px;
+        margin: 5px 20%;
+    }
+
+
 
     .sidebar-button:hover {
         /* background-color: #eee; */
