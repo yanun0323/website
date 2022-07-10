@@ -33,12 +33,12 @@ func main() {
 	}()
 
 	for {
-		time.Sleep(10 * time.Minute)
+		time.Sleep(1 * time.Minute)
 		go func() {
 			c := <-ch
 			e := app.Run()
 			ch <- e
-			l.Fatal(c.Shutdown(ctx))
+			l.Fatal(c.Close())
 			l.Fatal(e.Start(":8080"))
 			// l.Fatal(e.StartAutoTLS(":443"))
 		}()
