@@ -19,7 +19,7 @@ import (
 )
 
 const (
-	_GITHUB_TEMPLATE_DIR = ".internal/asset/template/"
+	_GITHUB_TEMPLATE_DIR = "./internal/asset/template/"
 )
 
 var (
