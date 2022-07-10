@@ -1,4 +1,4 @@
-.PHONY: run build docker.run docker.up docker.down
+.PHONY: run build docker.run docker.up docker.down docker.rm
 
 run:
 	go run ./main.go
@@ -18,3 +18,6 @@ docker.up:
 
 docker.down:
 	docker container stop website
+
+docker.rm:
+	docker rm -f website
