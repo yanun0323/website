@@ -1,0 +1,9 @@
+server:
+  site.url: 'http://localhost:8080/'
+  update.duration: '5m'
+
+resource:
+  # the raw url of github folder where you put all markdown files
+  markdown: 'https://raw.githubusercontent.com/'
+  # the raw url of text file that list what markdown file you want to show
+  list: 'https://raw.githubusercontent.com/'

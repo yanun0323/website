@@ -6,10 +6,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-const (
-	SITE_ADDRESS = "https://www.yanunyang.com/"
-)
-
 func Init(configName string) error {
 	name := configName
 	if len(configName) > 0 {

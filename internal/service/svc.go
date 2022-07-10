@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"strings"
 	"website/internal/domain"
-	"website/pkg/config"
 	"website/util"
 
 	"github.com/labstack/echo/v4"
+	"github.com/spf13/viper"
 	"github.com/yuin/goldmark"
 	highlighting "github.com/yuin/goldmark-highlighting"
 	"github.com/yuin/goldmark/extension"
@@ -20,8 +20,12 @@ import (
 
 const (
 	_GITHUB_TEMPLATE_DIR = "./asset/template/"
-	_GITHUB_MD_LIST_URL  = "https://raw.githubusercontent.com/yanun0323/memo/main/article"
-	_GITHUB_MD_URL       = "https://raw.githubusercontent.com/yanun0323/memo/main/markdown/"
+)
+
+var (
+	_GITHUB_MD_LIST_URL = ""
+	_GITHUB_MD_URL      = ""
+	_SITE_URL           = ""
 )
 
 type Service struct {
@@ -35,6 +39,10 @@ type Service struct {
 }
 
 func NewService(repo domain.IRepository) Service {
+	_GITHUB_MD_LIST_URL = viper.GetString("resource.list")
+	_GITHUB_MD_URL = viper.GetString("resource.markdown")
+	_SITE_URL = viper.GetString("server.site.url")
+
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
 		util.Url(_GITHUB_TEMPLATE_DIR, "style.html"),
@@ -135,7 +143,7 @@ func getButtonString(list []string) string {
 }
 
 func getHomeButtonStr() string {
-	return `<a href="` + config.SITE_ADDRESS + `">
+	return `<a href="` + _SITE_URL + `">
         <button class="sidebar-button sidebar-font-medium"> Home </button>
     </a>`
 }
