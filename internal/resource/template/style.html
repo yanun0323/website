@@ -91,28 +91,30 @@
         background-color: var(--block-shadow);
     }
 
-    .trigger {
-        transition: 0.3s;
+    button {
         display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 60px;
-        height: 1000px;
-        background-color: var(--quote-shadow);
-        opacity: 1;
+        background-color: transparent;
+        border: 1px transparent solid;
     }
 
-    .trigger:hover {
-        transition-delay: 0.3s;
-        opacity: 0;
+    .trigger {
+        transition: 0.5s;
+        animation-delay: 0.2s;
+        display: block;
+        opacity: 0.3;
+        font-size: 30px;
+        font-weight: bold;
+        padding: 25px 5px 25px 20px;
+        position: fixed;
+        top: 20%;
+        left: 5px;
+        background-color: #cfcfcf;
     }
 
     .markdown {
         font-size: 16px;
         font-weight: 400;
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
-        /* width: 70%; */
         margin-left: 100px;
         margin-right: 5%;
     }
@@ -122,11 +124,11 @@
         transition-duration: 0.3s;
 
         position: fixed;
-        top: 0;
+        top: -10%;
         left: -300px;
         width: 300px;
-        height: 2000px;
-        padding: 3% 350px 0 1%;
+        height: 3000px;
+        padding-top: 20%;
         background-color: white;
         opacity: 0;
     }
@@ -136,15 +138,8 @@
         opacity: 0.95;
     }
 
-    .trigger:hover+.sidebar {
-        left: 0px;
-        opacity: 0.95;
-    }
 
-    .a:active+.sidebar {
-        left: -300px;
-        opacity: 0;
-    }
+
 
     .sidebar-button {
         display: block;
@@ -154,21 +149,20 @@
 
     .sidebar-button-medium {
         height: 40px;
-        font-size: 24px;
+        font-size: 30px;
         margin: 10px 10%;
     }
 
     .sidebar-button-small {
         height: 25px;
         padding: 5px 0 0 0;
-        font-size: 14px;
+        font-size: 15px;
         margin: 5px 20%;
     }
 
 
 
     .sidebar-button:hover {
-        /* background-color: #eee; */
         opacity: 0.5;
         border-bottom: 1px gray solid;
     }

@@ -2,13 +2,30 @@
 <html>
 <header>
     <meta charset="utf-8">
+    <script>
+
+        function ShowSidebar() {
+            var x = document.getElementsByClassName("sidebar");
+            x[0].style.opacity = "0.95";
+            x[0].style.left = "0px";
+            document.getElementsByClassName("trigger")[0].style.display = "none";
+        }
+
+        function HideSidebar() {
+            var x = document.getElementsByClassName("sidebar");
+            x[0].style.left = "-500px";
+            document.getElementsByClassName("trigger")[0].style.display = "block";;
+        }
+
+    </script>
 </header>
 
 {{ template "style" . }}
 
-<body>
-    <div class="trigger">
-    </div>
+<body onclick="HideSidebar()" onscroll="HideSidebar()">
+    <button class="trigger" onclick="ShowSidebar()" onmouseover="ShowSidebar()">
+        〉
+    </button>
 
     <div class="sidebar">
         {{ .Button }}
@@ -18,7 +35,7 @@
         {{ .Body }}
     </div>
 
-    <div style="height: 500px;"></div>
+    <div style="height: 200px;"></div>
 
 </body>
 
