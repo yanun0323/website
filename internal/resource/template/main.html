@@ -7,8 +7,15 @@
 {{ template "style" . }}
 
 <body>
-    {{ template "sidebar" . }}
-    {{ template "markdown" . }}
+
+    <div class="sidebar">
+        {{ .Button }}
+    </div>
+
+    <div class="markdown">
+        {{ .Body }}
+    </div>
+
 </body>
 
 </html>

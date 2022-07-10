@@ -51,15 +51,11 @@ func NewService(repo domain.IRepository) Service {
 	urls := []string{
 		util.Url(_GITHUB_TEMPLATE_URL, "main.html"),
 		util.Url(_GITHUB_TEMPLATE_URL, "style.html"),
-		util.Url(_GITHUB_TEMPLATE_URL, "sidebar.html"),
-		util.Url(_GITHUB_TEMPLATE_URL, "markdown.html"),
 	}
 
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
 		util.Url(_GITHUB_TEMPLATE_DIR, "style.html"),
-		util.Url(_GITHUB_TEMPLATE_DIR, "sidebar.html"),
-		util.Url(_GITHUB_TEMPLATE_DIR, "markdown.html"),
 	}
 
 	for i, u := range urls {
