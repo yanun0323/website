@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"website/internal/repository"
 	"website/internal/service"
 
@@ -17,8 +18,9 @@ func Run() *echo.Echo {
 
 	rateLimiter := middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(20))
 	m := []echo.MiddlewareFunc{rateLimiter, middleware.WWWRedirect(), middleware.HTTPSRedirect()}
-	svc.SetHomePage(e, m...)
-	svc.SetAllArticlePage(e, m...)
+	fmt.Println(m)
+	svc.SetHomePage(e)
+	svc.SetAllArticlePage(e)
 
 	return e
 }
