@@ -9,9 +9,9 @@ RUN go build -o website ./main.go
 FROM alpine:3.15
 
 COPY --from=build /go/build/website /var/application/website
-COPY --from=build /go/build/asset/html /var/application/asset/html
-COPY --from=build /go/build/asset/html/portfolio /var/application/asset/html/portfolio
-COPY --from=build /go/build/asset/template /var/application/asset/template
+COPY --from=build /go/build/internal/asset/html /var/application/internal/asset/html
+COPY --from=build /go/build/internal/asset/html/portfolio /var/application/internal/asset/html/portfolio
+COPY --from=build /go/build/internal/asset/template /var/application/internal/asset/template
 
 EXPOSE 8080
 
