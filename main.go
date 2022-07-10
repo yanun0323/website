@@ -15,7 +15,7 @@ var (
 	ctx context.Context
 )
 
-func main2() {
+func main() {
 	l = log.Default()
 	ctx = context.Background()
 	if err := config.Init("config"); err != nil {
