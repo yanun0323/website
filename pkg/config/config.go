@@ -12,7 +12,6 @@ func Init(configName string) error {
 		name = "config"
 	}
 	viper.AddConfigPath(util.GetAbsPath("config"))
-	viper.AddConfigPath(util.GetAbsPath())
 	viper.AutomaticEnv()
 	viper.SetConfigName(name)
 	viper.SetConfigType("yaml")
