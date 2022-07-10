@@ -28,8 +28,8 @@ func main() {
 	go func() {
 		e := app.Run()
 		ch <- e
-		l.Fatal(e.Start(":8080"))
-		// l.Fatal(e.StartAutoTLS(":443"))
+		e.Start(":8080")
+		// l.Fatal(e.StartAutoTLS(":8080"))
 	}()
 
 	for {
@@ -38,9 +38,9 @@ func main() {
 			c := <-ch
 			e := app.Run()
 			ch <- e
-			l.Fatal(c.Close())
-			l.Fatal(e.Start(":8080"))
-			// l.Fatal(e.StartAutoTLS(":443"))
+			c.Close()
+			e.Start(":8080")
+			// l.Fatal(e.StartAutoTLS(":8080"))
 		}()
 	}
 }
