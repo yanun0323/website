@@ -50,11 +50,12 @@ func NewService(repo domain.IRepository) Service {
 
 	urls := []string{
 		util.Url(_GITHUB_TEMPLATE_URL, "main.html"),
-		util.Url(_GITHUB_TEMPLATE_URL, "style.css"),
+		// util.Url(_GITHUB_TEMPLATE_URL, "style.css"),
 	}
 
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
+		// util.Url(_GITHUB_TEMPLATE_DIR, "style.css"),
 	}
 
 	if skip := viper.GetBool("test"); !skip {
