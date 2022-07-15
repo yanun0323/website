@@ -17,7 +17,7 @@ func NewGithubDao() GithubDao {
 }
 
 func (dao GithubDao) GetMarkdownList(url string) []string {
-	buf, err := GetHttpBodyBuf(url)
+	buf, err := dao.GetHttpBodyBuf(url)
 	if err != nil {
 		return nil
 	}
@@ -25,14 +25,14 @@ func (dao GithubDao) GetMarkdownList(url string) []string {
 }
 
 func (dao GithubDao) GetMarkdown(url string) ([]byte, error) {
-	return GetHttpBodyBuf(url)
+	return dao.GetHttpBodyBuf(url)
 }
 
 func (dao GithubDao) GetTemplate(url string) ([]byte, error) {
-	return GetHttpBodyBuf(url)
+	return dao.GetHttpBodyBuf(url)
 }
 
-func GetHttpBodyBuf(url string) ([]byte, error) {
+func (dao GithubDao) GetHttpBodyBuf(url string) ([]byte, error) {
 	log.Println("downloading file form: " + url)
 	response, err := http.Get(url)
 	if err != nil {

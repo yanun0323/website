@@ -50,12 +50,10 @@ func NewService(repo domain.IRepository) Service {
 
 	urls := []string{
 		util.Url(_GITHUB_TEMPLATE_URL, "main.html"),
-		// util.Url(_GITHUB_TEMPLATE_URL, "style.css"),
 	}
 
 	files := []string{
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
-		// util.Url(_GITHUB_TEMPLATE_DIR, "style.css"),
 	}
 
 	if skip := viper.GetBool("test"); !skip {
@@ -78,7 +76,7 @@ func NewService(repo domain.IRepository) Service {
 	ls := repo.GetMarkdownList(_GITHUB_MD_LIST_URL)
 
 	return Service{
-		template: template.Must(template.ParseFiles(files...)),
+		template: template.Must(template.ParseFiles(files[0])),
 		mdReader: md,
 		repo:     repo,
 		l:        l,
@@ -88,25 +86,27 @@ func NewService(repo domain.IRepository) Service {
 }
 
 func (svc *Service) SetHomePage(e *echo.Echo, m ...echo.MiddlewareFunc) {
-	e.GET("/", func(c echo.Context) error {
-		url := mdUrl(_GITHUB_MD_URL, "home")
-		html, err := svc.getMarkdownHtml(url)
-		if err != nil {
-			return c.HTML(http.StatusNotFound, err.Error())
-		}
-		return c.HTML(http.StatusOK, html)
-	}, m...)
+	svc.setMdPage(e, "/", getUrl(_GITHUB_MD_URL, "home", ".md"), m...)
 }
 
 func (svc *Service) SetAllArticlePage(e *echo.Echo, m ...echo.MiddlewareFunc) {
 	for _, name := range svc.list {
-		svc.setArticlePage(e, name, m...)
+		svc.setMdPage(e, "/"+name, getUrl(_GITHUB_MD_URL, name, ".md"), m...)
 	}
 }
 
-func (svc *Service) setArticlePage(e *echo.Echo, name string, m ...echo.MiddlewareFunc) {
-	e.GET("/"+name, func(c echo.Context) error {
-		url := mdUrl(_GITHUB_MD_URL, name)
+func (svc *Service) setPage(e *echo.Echo, path, url string, m ...echo.MiddlewareFunc) {
+	e.GET(path, func(c echo.Context) error {
+		buf, err := svc.repo.GetHttpBodyBuf(url)
+		if err != nil {
+			return c.HTML(http.StatusNotFound, err.Error())
+		}
+		return c.HTML(http.StatusOK, string(buf))
+	}, m...)
+}
+
+func (svc *Service) setMdPage(e *echo.Echo, path, url string, m ...echo.MiddlewareFunc) {
+	e.GET(path, func(c echo.Context) error {
 		html, err := svc.getMarkdownHtml(url)
 		if err != nil {
 			return c.HTML(http.StatusNotFound, err.Error())
@@ -120,6 +120,9 @@ func (svc *Service) getMarkdownHtml(url string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	css, err := svc.repo.GetHttpBodyBuf(getUrl(_GITHUB_TEMPLATE_URL, "style", ".css"))
+
 	buf := new(bytes.Buffer)
 	if err := svc.mdReader.Convert(md, buf); err != nil {
 		return "", err
@@ -131,9 +134,11 @@ func (svc *Service) getMarkdownHtml(url string) (string, error) {
 		struct {
 			Body   template.HTML
 			Button template.HTML
+			CSS    template.HTML
 		}{
 			Body:   template.HTML(buf.String()),
 			Button: template.HTML(svc.btn),
+			CSS:    template.HTML("<style>" + string(css) + "</style>"),
 		}); err != nil {
 		return "", fmt.Errorf("execute buf, %w", err)
 	}
@@ -145,8 +150,8 @@ func mdUrl(host, name string) string {
 	return host + name + ".md"
 }
 
-func htmlUrl(host, name string) string {
-	return host + name + ".html"
+func getUrl(host, name, suffix string) string {
+	return host + name + suffix
 }
 
 func downloadTemplate(repo domain.IRepository, urls, files []string) {
