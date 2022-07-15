@@ -1,0 +1,166 @@
+:root {
+    --title: rgba(36, 41, 47);
+    --quote-shadow: rgba(208, 215, 220);
+    --code-shadow: rgba(239, 241, 243);
+    --block-shadow: rgba(246, 248, 250);
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+h1,
+h2 {
+    word-spacing: -5px;
+    color: var(--title);
+    border-bottom: 1px var(--quote-shadow) solid;
+    padding-bottom: 5px;
+    margin-top: 70px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+li,
+ul,
+ol {
+    margin: 10px 0;
+}
+
+blockquote {
+    font-size: 20px;
+    color: #666661;
+    border-left: 4px var(--quote-shadow) solid;
+    padding-left: 30px;
+    margin: 0;
+    line-height: 30px;
+}
+
+pre {
+    padding-left: 30px;
+    border-radius: 5px;
+    background-color: var(--code-shadow);
+    line-height: 25px;
+
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+code {
+    font-size: 15px;
+    padding: 3px 5px;
+    border-radius: 3px;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono;
+    background-color: var(--code-shadow);
+}
+
+pre code {
+    background-color: transparent;
+}
+
+table {
+    font-size: 14px;
+    background-color: var(--quote-shadow);
+}
+
+th,
+td {
+    padding: 20px 15px;
+    background-color: white;
+}
+
+td {
+    background-color: var(--block-shadow);
+}
+
+button {
+    display: block;
+    background-color: transparent;
+    border: 1px transparent solid;
+}
+
+.trigger {
+    transition: 0.5s;
+    animation-delay: 0.2s;
+    display: block;
+    opacity: 0.3;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 25px 5px 25px 20px;
+    position: fixed;
+    top: 20%;
+    left: 5px;
+    background-color: #cfcfcf;
+}
+
+.markdown {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    margin-left: 100px;
+    margin-right: 5%;
+}
+
+
+.sidebar {
+    transition-duration: 0.3s;
+
+    position: fixed;
+    top: -10%;
+    left: -300px;
+    width: 300px;
+    height: 3000px;
+    padding-top: 20%;
+    background-color: white;
+    opacity: 0;
+}
+
+.sidebar:hover {
+    left: 0px;
+    opacity: 0.95;
+}
+
+
+
+
+.sidebar-button {
+    display: block;
+    background-color: transparent;
+    border: 1px transparent solid;
+}
+
+.sidebar-button-medium {
+    height: 40px;
+    font-size: 30px;
+    margin: 10px 10%;
+}
+
+.sidebar-button-small {
+    height: 25px;
+    padding: 5px 0 0 0;
+    font-size: 15px;
+    margin: 5px 20%;
+}
+
+
+
+.sidebar-button:hover {
+    opacity: 0.5;
+    border-bottom: 1px gray solid;
+}
