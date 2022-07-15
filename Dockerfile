@@ -10,9 +10,7 @@ FROM alpine:3.15
 
 COPY --from=build /go/build/website /var/application/website
 COPY --from=build /go/build/config /var/application/config
-COPY --from=build /go/build/internal/resource/html /var/application/internal/resource/html
-COPY --from=build /go/build/internal/resource/html/portfolio /var/application/internal/resource/html/portfolio
-COPY --from=build /go/build/internal/resource/template /var/application/internal/resource/template
+COPY --from=build /go/build/internal/resource /var/application/internal/resource
 
 EXPOSE 8080
 
