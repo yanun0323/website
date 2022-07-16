@@ -10,6 +10,7 @@ import (
 	"os"
 	"strings"
 	"website/internal/domain"
+	"website/internal/model"
 	"website/util"
 
 	"github.com/labstack/echo/v4"
@@ -22,6 +23,7 @@ import (
 
 const (
 	_GITHUB_TEMPLATE_DIR = "./internal/resource/template/"
+	_CATEGORY_DEFAULT    = "未分類"
 )
 
 var (
@@ -56,7 +58,7 @@ func NewService(repo domain.IRepository) Service {
 		util.Url(_GITHUB_TEMPLATE_DIR, "main.html"),
 	}
 
-	if skip := viper.GetBool("test"); !skip {
+	if skip := viper.GetBool("skip.download.template"); !skip {
 		downloadTemplate(repo, urls, files)
 	}
 
@@ -200,21 +202,34 @@ func saveToLocal(name string, data []byte, skipZero bool) error {
 
 func getButtonString(list []string) string {
 	result := make([]byte, 0, 30)
+	hash := make(map[string]*model.Category, 0)
 
-	result = append(result, []byte(getHomeButtonStr())...)
-	for _, str := range list {
-		result = append(result, []byte(getButtonStr(str))...)
+	result = append(result, model.NewSideButton("Home", _SITE_URL, true).Byte()...)
+	hash[_CATEGORY_DEFAULT] = model.NewCategory(_CATEGORY_DEFAULT)
+	for _, name := range list {
+		raw, category, single := separator(name)
+		if single {
+			category = _CATEGORY_DEFAULT
+		}
+		_, exist := hash[category]
+		if !exist {
+			hash[category] = model.NewCategory(category)
+		}
+		hash[category].AppendButton(model.NewSideButton(raw, name, false))
 	}
+	for _, category := range hash {
+		result = append(result, category.Byte()...)
+	}
+
 	return string(result)
 }
 
-func getHomeButtonStr() string {
-	return `<a href="` + _SITE_URL + `">
-        <button class="sidebar-button sidebar-button-medium"> Home </button>
-    </a>`
-}
+func separator(str string) (name string, category string, single bool) {
+	collection := strings.Split(str, "-")
 
-func getButtonStr(name string) string {
-	return `<a id="0" href="` +
-		name + `"><button class="sidebar-button sidebar-button-small">` + name + ` </button></a>`
+	if len(collection) == 1 {
+		return str, "", true
+	}
+
+	return collection[1], collection[0], false
 }

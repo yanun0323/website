@@ -5,14 +5,14 @@
     <script>
 
         function ShowSidebar() {
-            var x = document.getElementsByClassName("sidebar");
+            var x = document.getElementsByClassName("sidebar-base");
             x[0].style.opacity = "0.95";
             x[0].style.left = "0px";
             document.getElementsByClassName("trigger")[0].style.display = "none";
         }
 
         function HideSidebar() {
-            var x = document.getElementsByClassName("sidebar");
+            var x = document.getElementsByClassName("sidebar-base");
             x[0].style.left = "-500px";
             document.getElementsByClassName("trigger")[0].style.display = "block";;
         }
@@ -22,22 +22,22 @@
 
 {{ .CSS }}
 
-
-<body onclick="HideSidebar()" onscroll="HideSidebar()">
+<body>
     <button class="trigger" onclick="ShowSidebar()" onmouseover="ShowSidebar()">
         〉
     </button>
 
-    <div class="sidebar">
+    <div class="sidebar-base">
         {{ .Button }}
     </div>
 
-    <div class="markdown">
-        {{ .Body }}
+    <div onclick="HideSidebar()" onscroll="HideSidebar()" onpointerdown="HideSidebar()">
+        <div class="markdown">
+            {{ .Body }}
+        </div>
+
+        <div style="height: 200px;"></div>
     </div>
-
-    <div style="height: 200px;"></div>
-
 </body>
 
 </html>
